@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conecta Móvil – Celulares en La Romana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7FB;--ink:#0E1330;--muted:#5A6180;--blue:#2B3BFF;--blue-ink:#fff;
+  --sun:#FFD23F;--card:#fff;--line:#DDE0EE;
+  --phone:#2B3BFF;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--paper:#0E1330;--ink:#F2F3FA;--muted:#A3A9C9;--blue:#8C97FF;--blue-ink:#0E1330;--card:#171D45;--line:#2A3166}
+}
+:root[data-theme="dark"]{--paper:#0E1330;--ink:#F2F3FA;--muted:#A3A9C9;--blue:#8C97FF;--blue-ink:#0E1330;--card:#171D45;--line:#2A3166}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.55 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;line-height:1.05;margin:0;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{font:800 1.3rem "Bricolage Grotesque",sans-serif;text-decoration:none}
+.logo span{color:var(--blue)}
+nav{display:flex;gap:20px;align-items:center}
+nav a{text-decoration:none;font-weight:600;font-size:.95rem}
+.cart{border:2px solid var(--ink);background:none;color:var(--ink);border-radius:999px;padding:6px 14px;font:600 .9rem inherit;cursor:pointer}
+.cart b{display:inline-block;min-width:1.4em;background:var(--ink);color:var(--paper);border-radius:99px;padding:0 6px;margin-left:6px}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:56px 0 64px}
+.hero h1{font-size:clamp(2.6rem,7vw,5rem);font-weight:800}
+.hero p{max-width:46ch;color:var(--muted);font-size:1.1rem;margin:20px 0 28px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;border-radius:12px;padding:14px 22px;font-weight:600;text-decoration:none;border:2px solid var(--ink);cursor:pointer;background:none;color:var(--ink);font-family:inherit;font-size:1rem}
+.btn.main{background:var(--blue);border-color:var(--blue);color:var(--blue-ink)}
+.stage{display:flex;flex-direction:column;align-items:center;gap:22px}
+.phone{width:210px;height:420px;border-radius:38px;background:var(--phone);position:relative;box-shadow:inset 0 0 0 7px rgba(0,0,0,.28),0 30px 50px -20px rgba(14,19,48,.45);transition:background .35s;transform:rotate(-6deg)}
+.phone::before{content:"";position:absolute;inset:7px;border-radius:32px;background:linear-gradient(160deg,rgba(255,255,255,.25),rgba(255,255,255,0) 55%)}
+.phone::after{content:"";position:absolute;top:18px;left:50%;width:62px;height:16px;margin-left:-31px;border-radius:99px;background:rgba(0,0,0,.55)}
+.cam{position:absolute;top:60px;left:26px;width:78px;height:78px;border-radius:22px;background:rgba(0,0,0,.35);display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:11px}
+.cam i{border-radius:50%;background:#0b0e22;box-shadow:inset 0 0 0 3px #3a3f66}
+.swatches{display:flex;gap:12px;align-items:center}
+.swatches span{font-size:.9rem;color:var(--muted);margin-right:4px}
+.sw{width:32px;height:32px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 0 0 2px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ink)}
+
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-block:1px solid var(--line)}
+.perks div{padding:26px 22px;border-left:1px solid var(--line)}
+.perks div:first-child{border-left:0;padding-left:0}
+.perks strong{display:block;font:800 1.15rem "Bricolage Grotesque",sans-serif;margin-bottom:4px}
+.perks p{margin:0;color:var(--muted);font-size:.95rem}
+
+section{padding:64px 0}
+h2{font-size:clamp(2rem,4.5vw,3rem);font-weight:800}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:7px 16px;font:600 .9rem "Instrument Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.thumb{height:150px;border-radius:12px;display:grid;place-items:center}
+.mini{width:62px;height:118px;border-radius:14px;box-shadow:inset 0 0 0 3px rgba(0,0,0,.3);transform:rotate(-5deg)}
+.card h3{font-size:1.25rem}
+.card .brand{color:var(--muted);font-size:.9rem;margin:0}
+.spec{margin:0;font-size:.9rem;color:var(--muted)}
+.price{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px}
+.price b{font:800 1.3rem "Bricolage Grotesque",sans-serif}
+.add{background:var(--blue);color:var(--blue-ink);border:0;border-radius:10px;padding:10px 14px;font:600 .9rem "Instrument Sans",sans-serif;cursor:pointer}
+
+.visit{background:var(--ink);color:var(--paper);border-radius:26px;padding:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.visit h2{color:var(--sun)}
+.visit p{margin:10px 0;color:inherit;opacity:.85}
+.visit .btn{border-color:var(--sun);background:var(--sun);color:#0E1330;margin-top:8px}
+.hours{margin:0;padding:0;list-style:none}
+.hours li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.2);padding:10px 0}
+footer{padding:28px 0 40px;color:var(--muted);font-size:.9rem}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:20}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:32px}
+  nav a{display:none}
+  .perks{grid-template-columns:1fr}
+  .perks div{border-left:0;border-top:1px solid var(--line);padding-left:0}
+  .perks div:first-child{border-top:0}
+  .visit{grid-template-columns:1fr;padding:30px 22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <a class="logo" href="#">Conecta<span>Móvil</span></a>
+  <nav><a href="#catalogo">Catálogo</a><a href="#visitanos">Visítanos</a>
+  <button class="cart" id="cartBtn" aria-label="Ver pedido">Pedido<b id="count">0</b></button></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Tu próximo celular, hoy mismo.</h1>
+      <p>Smartphones nuevos con garantía, financiamiento sin trámites complicados y configuración incluida en la tienda.</p>
+      <div class="btns">
+        <a class="btn main" href="#catalogo">Ver celulares</a>
+        <a class="btn" href="https://wa.me/18095550123" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="phone" id="phone"><div class="cam"><i></i><i></i><i></i><i></i></div></div>
+      <div class="swatches" role="group" aria-label="Color del celular">
+        <span>Elige un color</span>
+        <button class="sw" style="background:#2B3BFF" data-c="#2B3BFF" aria-pressed="true" aria-label="Azul"></button>
+        <button class="sw" style="background:#14B86A" data-c="#14B86A" aria-pressed="false" aria-label="Verde"></button>
+        <button class="sw" style="background:#F2623B" data-c="#F2623B" aria-pressed="false" aria-label="Coral"></button>
+        <button class="sw" style="background:#2A2D3E" data-c="#2A2D3E" aria-pressed="false" aria-label="Grafito"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="perks">
+    <div><strong>Garantía de 12 meses</strong><p>En todos los equipos nuevos.</p></div>
+    <div><strong>Pago en cuotas</strong><p>Hasta 12 meses con tarjeta o en tienda.</p></div>
+    <div><strong>Te lo configuramos</strong><p>Pasamos tus contactos y fotos sin costo.</p></div>
+  </div>
+
+  <section id="catalogo">
+    <div class="head">
+      <h2>Catálogo</h2>
+      <div class="chips" role="group" aria-label="Filtrar por marca" id="chips"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="visitanos" style="padding-top:0">
+    <div class="visit">
+      <div>
+        <h2>Pasa por la tienda</h2>
+        <p>Prueba los equipos en mano antes de decidir. Aceptamos tu celular usado como parte de pago.</p>
+        <p>Calle Duarte #25, La Romana · Tel. 809-555-0123</p>
+        <a class="btn" href="https://wa.me/18095550123" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      </div>
+      <ul class="hours">
+        <li><span>Lunes a viernes</span><span>9:00 – 19:00</span></li>
+        <li><span>Sábado</span><span>9:00 – 17:00</span></li>
+        <li><span>Domingo</span><span>10:00 – 14:00</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© 2026 Conecta Móvil. Precios en pesos dominicanos (RD$) y sujetos a cambio.</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+var PHONES=[
+ {n:"Galaxy A55",b:"Samsung",s:"128 GB · 8 GB RAM · 50 MP",p:23900,c:"#7C8CFF"},
+ {n:"Galaxy S24",b:"Samsung",s:"256 GB · 8 GB RAM · 50 MP",p:48900,c:"#2A2D3E"},
+ {n:"iPhone 15",b:"Apple",s:"128 GB · 48 MP · USB-C",p:58900,c:"#F4B8C8"},
+ {n:"iPhone 14",b:"Apple",s:"128 GB · 12 MP · Face ID",p:44900,c:"#2B3BFF"},
+ {n:"Redmi Note 13",b:"Xiaomi",s:"256 GB · 8 GB RAM · 108 MP",p:15900,c:"#14B86A"},
+ {n:"Poco X6",b:"Xiaomi",s:"256 GB · 12 GB RAM · 64 MP",p:19900,c:"#FFD23F"},
+ {n:"Moto G54",b:"Motorola",s:"128 GB · 8 GB RAM · 50 MP",p:13900,c:"#F2623B"},
+ {n:"Tecno Spark 20",b:"Tecno",s:"128 GB · 8 GB RAM · 50 MP",p:8900,c:"#9AA3C7"}
+];
+var brands=["Todas"].concat(PHONES.map(function(x){return x.b}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var current="Todas",count=0;
+var fmt=function(n){return "RD$ "+n.toLocaleString("es-DO")};
+var grid=document.getElementById("grid"),chips=document.getElementById("chips"),toast=document.getElementById("toast"),tt;
+
+function say(m){toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("on")},2200)}
+
+function render(){
+  grid.innerHTML="";
+  PHONES.filter(function(x){return current==="Todas"||x.b===current}).forEach(function(x){
+    var d=document.createElement("article");d.className="card";
+    d.innerHTML='<div class="thumb" style="background:'+x.c+'33"><div class="mini" style="background:'+x.c+'"></div></div>'+
+      '<h3>'+x.n+'</h3><p class="brand">'+x.b+'</p><p class="spec">'+x.s+'</p>'+
+      '<div class="price"><b>'+fmt(x.p)+'</b><button class="add">Agregar</button></div>';
+    d.querySelector(".add").onclick=function(){
+      count++;document.getElementById("count").textContent=count;say(x.n+" agregado al pedido");
+    };
+    grid.appendChild(d);
+  });
+}
+brands.forEach(function(b){
+  var c=document.createElement("button");c.className="chip";c.textContent=b;
+  c.setAttribute("aria-pressed",b===current);
+  c.onclick=function(){current=b;[].forEach.call(chips.children,function(k){k.setAttribute("aria-pressed",k===c)});render()};
+  chips.appendChild(c);
+});
+document.getElementById("cartBtn").onclick=function(){
+  say(count?count+" equipo(s) en tu pedido. Escríbenos por WhatsApp para confirmar.":"Tu pedido está vacío. Agrega un celular del catálogo.");
+};
+[].forEach.call(document.querySelectorAll(".sw"),function(s){
+  s.onclick=function(){
+    document.getElementById("phone").style.setProperty("background",s.dataset.c);
+    [].forEach.call(document.querySelectorAll(".sw"),function(o){o.setAttribute("aria-pressed",o===s)});
+  };
+});
+render();
+</script>
+</body>
+</html>
